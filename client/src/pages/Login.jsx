@@ -41,18 +41,18 @@ const Login = () => {
     const submitHandler = (e) => {
         e.preventDefault();
         submitFormData();
-        // navigateTo('/');
+        navigateTo('/');
     };
 
     const logoutHandler = (e) => {
         setUser(() => null);
     };
 
-    return (
-        //     <div>
-        //         <button onClick={logoutHandler}>Logout</button>
-        //     </div>
-        // ) :
+    return user ? (
+        <div>
+            <button onClick={logoutHandler}>Logout</button>
+        </div>
+    ) : (
         <div>
             <h1>{loginState}</h1>
             <p>Please Register/Login</p>

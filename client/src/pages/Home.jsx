@@ -7,7 +7,7 @@ const Home = () => {
 
     return (
         <div>
-            <h1>{user ? `Welcome ${user.username}!!` : `Photoapp!`} </h1>
+            <h1>{user ? `Welcome ${user.username}!` : `Photoapp!`} </h1>
         </div>
     );
 };

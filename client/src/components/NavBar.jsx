@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { useContext } from 'react';
 import { Navbar } from 'react-bootstrap';
-// import LikeContext from '../contexts/LikeContext';
+import LikeContext from '../contexts/LikeContext';
 import UserContext from '../contexts/UserContext';
 
 const styles = {
@@ -10,25 +10,51 @@ const styles = {
 };
 
 //Key difference between Link and NavLink is to hace access of this "isActive" object.
-// const activeStyle = ({ isActive }) => {
-//     return { color: isActive ? 'Red' : 'Green' };
-// };
+const linkStyle = {
+    color: 'black',
+    textDecoration: 'none',
+    fontFamily: 'Joan',
+    fontSize: '15px',
+    margin: '10px',
+    height: '100px',
+};
+
+const navbarColor = {
+    display: 'flex',
+    justifyContent: 'end',
+    backgroundColor: '#B1BCA0',
+    height: '150px',
+    margin: '10px',
+};
 
 const NavBar = () => {
-    //     const { likes } = useContext(LikeContext);
+    const { likes } = useContext(LikeContext);
     const { user } = useContext(UserContext);
 
     return (
-        // this empty <> calls React fragments
-        <Navbar bg='dark'>
-            <div style={styles}>
-                <NavLink to='/' style={styles}>
-                    Home
+        <Navbar style={navbarColor}>
+            <NavLink to='/' style={linkStyle}>
+                Home
+            </NavLink>
+            {user ? (
+                <NavLink to='login' style={linkStyle}>
+                    Logout
                 </NavLink>
-                <NavLink to='login' style={styles}>
+            ) : (
+                <NavLink to='login' style={linkStyle}>
                     Login
                 </NavLink>
-            </div>
+            )}
+
+            {user ? (
+                <NavLink to='profile' style={linkStyle}>
+                    Profile
+                </NavLink>
+            ) : (
+                <NavLink to='login' style={linkStyle}>
+                    Signup
+                </NavLink>
+            )}
             <hr />
         </Navbar>
     );

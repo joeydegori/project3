@@ -33,6 +33,7 @@ router.post('/register', async (req, res) => {
             // role: user.role,
             token,
         });
+        return res.redirect('/profile');
     } catch (error) {
         console.log(error);
     }
@@ -48,7 +49,6 @@ router.post('/login', async (req, res) => {
 
     try {
         const user = await User.findOne({ username });
-
         if (user && (await bcrypt.compare(password, user.password))) {
             const token = generateToken(user._id);
             res.status(200).json({
