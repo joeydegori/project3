@@ -9,6 +9,7 @@ import NavBar from './components/NavBar';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
+import Photos from './pages/Photos';
 
 //providers
 import { UserProvider } from './contexts/UserContext';
@@ -24,6 +25,7 @@ const App = () => {
                     <div className='App'>
                         <NavBar />
                         <Routes>
+                            <Route path='photos' element={<Photos />} />
                             <Route path='/' element={<Home />} />
                             <Route path='login' element={<Login />} />
                             <Route path='profile' element={<Profile />} />

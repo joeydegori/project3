@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const authRoutes = require('./auth.routes');
+const photosRoutes = require('./photos.routes');
 
 router.get('/', (req, res, next) => {
     res.json('All good in here');
@@ -9,4 +10,5 @@ router.get('/', (req, res, next) => {
 // example: router.use("/auth", authRoutes)
 router.use('/', authRoutes);
 
+router.use('/', photosRoutes);
 module.exports = router;

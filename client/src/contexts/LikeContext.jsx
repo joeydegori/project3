@@ -7,7 +7,7 @@ export const LikeProvider = ({ children }) => {
         JSON.parse(localStorage.getItem('likes')) || []
     );
 
-    //store the likes(liked books id) in the local storage
+    //store the likes(liked photos id) in the local storage
     useEffect(() => {
         localStorage.setItem('likes', JSON.stringify(likes));
     }, [likes]);
@@ -17,13 +17,13 @@ export const LikeProvider = ({ children }) => {
             setLikes((prevLikes) => [...prevLikes, photoId]);
     };
 
-    const updateLikedBooks = (likeState, photoId) => {
+    const updateLikedPhotos = (likeState, photoId) => {
         likeState
             ? uniqueLikes(photoId)
             : setLikes((prevLikes) => prevLikes.filter((id) => id !== photoId));
     };
     return (
-        <LikeContext.Provider value={{ likes, updateLikedBooks }}>
+        <LikeContext.Provider value={{ likes, updateLikedPhotos }}>
             {children}
         </LikeContext.Provider>
     );

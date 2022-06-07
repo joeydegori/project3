@@ -33,9 +33,13 @@ const NavBar = () => {
 
     return (
         <Navbar style={navbarColor}>
+            <NavLink to='photos' style={linkStyle}>
+                Photos
+            </NavLink>
             <NavLink to='/' style={linkStyle}>
                 Home
             </NavLink>
+
             {user ? (
                 <NavLink to='login' style={linkStyle}>
                     Logout
