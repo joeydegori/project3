@@ -1,8 +1,8 @@
-const AddPhoto = () => {
+const AddPhotos = () => {
     return (
         <div>
             <p></p>
         </div>
     );
 };
-export default AddPhoto;
+export default AddPhotos;

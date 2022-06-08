@@ -10,6 +10,8 @@ import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Photos from './pages/Photos';
+import AddPhotos from './pages/AddPhotos';
+import PhotoDetails from './pages/PhotoDetails';
 
 //providers
 import { UserProvider } from './contexts/UserContext';
@@ -29,6 +31,11 @@ const App = () => {
                             <Route path='/' element={<Home />} />
                             <Route path='login' element={<Login />} />
                             <Route path='profile' element={<Profile />} />
+                            <Route
+                                path='photos/:id'
+                                element={<PhotoDetails />}
+                            />
+                            <Route path='addphotos' element={<AddPhotos />} />
                         </Routes>
                     </div>
                 </LikeProvider>
