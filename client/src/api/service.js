@@ -24,7 +24,6 @@ const uploadImage = (file) => {
         .post('/upload', file)
         .then((res) => res.data)
         .catch(errorHandler);
-    console.log(file);
 };
 
 const createPhoto = (newPhoto) => {

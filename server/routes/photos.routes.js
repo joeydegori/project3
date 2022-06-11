@@ -92,4 +92,17 @@ router.get('/photos/:photoId', (req, res, next) => {
         );
 });
 
+// ************************************************
+// POST Route: DELETE THE Photo ROUTE
+// ************************************************
+router.delete('/photos/:photoID', (req, res) => {
+    Photo.findByIdAndDelete(req.params.photoID)
+        .then(() =>
+            res.status(200).json({ message: 'Photo deleted successfully' })
+        )
+        .catch((err) =>
+            console.log('Error while deleting a photo from the DB: ', err)
+        );
+});
+
 module.exports = router;

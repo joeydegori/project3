@@ -54,8 +54,11 @@ const Photos = () => {
                 .map((photo) => {
                     return (
                         <div key={photo._id}>
+                            <img src={photo.imageUrl} alt='Photos' />
                             <p>
-                                <Link to={photo._id}>{photo.title}</Link>
+                                <button>
+                                    <Link to={photo._id}>{photo.title}</Link>
+                                </button>
                             </p>
                         </div>
                     );

@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import Photos from './pages/Photos';
 import AddPhoto from './pages/AddPhoto';
 import PhotoDetails from './pages/PhotoDetails';
+import LikedPosts from './pages/LikedPosts';
 
 //providers
 import { UserProvider } from './contexts/UserContext';
