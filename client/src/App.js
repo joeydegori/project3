@@ -10,7 +10,7 @@ import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Photos from './pages/Photos';
-import AddPhotos from './pages/AddPhotos';
+import AddPhoto from './pages/AddPhoto';
 import PhotoDetails from './pages/PhotoDetails';
 
 //providers
@@ -35,7 +35,7 @@ const App = () => {
                                 path='photos/:id'
                                 element={<PhotoDetails />}
                             />
-                            <Route path='addphotos' element={<AddPhotos />} />
+                            <Route path='addphoto' element={<AddPhoto />} />
                         </Routes>
                     </div>
                 </LikeProvider>
