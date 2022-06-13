@@ -10,7 +10,7 @@ const userSchema = new Schema(
         password: String,
         //YOU commented VV this because you don't have a like context yet or an admin role yet
 
-        like: [
+        likedposts: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Photo',

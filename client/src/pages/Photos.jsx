@@ -1,17 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { authAxios } from '../customAxios/authAxios';
 import { Link } from 'react-router-dom';
+import UserContext from '../contexts/UserContext';
 
 const Photos = () => {
     const [photos, setPhotos] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const { user } = useContext(UserContext);
 
     //Requestiong all the photos from our database
     //authAxios is custom axios instance, it allows us to send Bearer tokens with the request
     //We are using authAxios here to prevent unauthorized user to view the photos list
     const getPhotos = async () => {
-        const { data } = await axios.get(`http://localhost:5005/photos`);
+        const { data } = await authAxios.get(`http://localhost:5005/photos`);
         setPhotos(() => data);
     };
 
@@ -28,7 +30,7 @@ const Photos = () => {
         }
     }, []); //<-- No dependency, means it will execute only one time
 
-    return (
+    return user ? (
         <div>
             <h1>Photos List</h1>
             <div>
@@ -64,6 +66,8 @@ const Photos = () => {
                     );
                 })}
         </div>
+    ) : (
+        <></>
     );
 };
 export default Photos;

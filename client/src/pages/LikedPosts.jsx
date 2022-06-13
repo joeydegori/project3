@@ -1,7 +1,7 @@
 const LikedPosts = () => {
     return (
         <div>
-            <p></p>
+            <p>Hello Saved Posts </p>
         </div>
     );
 };

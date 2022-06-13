@@ -3,17 +3,17 @@ import { createContext, useState, useEffect } from 'react';
 const LikeContext = createContext();
 
 export const LikeProvider = ({ children }) => {
-    const [likes, setLikes] = useState(
-        JSON.parse(localStorage.getItem('likes')) || []
+    const [likedposts, setLikes] = useState(
+        JSON.parse(localStorage.getItem('likedposts')) || []
     );
 
     //store the likes(liked photos id) in the local storage
     useEffect(() => {
-        localStorage.setItem('likes', JSON.stringify(likes));
-    }, [likes]);
+        localStorage.setItem('likedphotos', JSON.stringify(likedposts));
+    }, [likedposts]);
 
     const uniqueLikes = (photoId) => {
-        if (!likes.includes(photoId))
+        if (!likedposts.includes(photoId))
             setLikes((prevLikes) => [...prevLikes, photoId]);
     };
 
@@ -23,7 +23,7 @@ export const LikeProvider = ({ children }) => {
             : setLikes((prevLikes) => prevLikes.filter((id) => id !== photoId));
     };
     return (
-        <LikeContext.Provider value={{ likes, updateLikedPhotos }}>
+        <LikeContext.Provider value={{ likedposts, updateLikedPhotos }}>
             {children}
         </LikeContext.Provider>
     );

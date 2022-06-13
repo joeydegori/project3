@@ -37,6 +37,10 @@ const App = () => {
                                 element={<PhotoDetails />}
                             />
                             <Route path='addphoto' element={<AddPhoto />} />
+                            <Route
+                                path='photos/likedposts'
+                                element={<LikedPosts />}
+                            />
                         </Routes>
                     </div>
                 </LikeProvider>

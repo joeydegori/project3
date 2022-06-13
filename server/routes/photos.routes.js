@@ -55,6 +55,28 @@ router.post('/photos/newphoto', (req, res) => {
 });
 
 // ************************************************
+// POST Route: FOR LIKED POSTS
+// ************************************************
+router.post('/photos/likedposts', async (req, res, next) => {
+    const { userID, photoID } = req.body;
+    console.log(userID, photoID);
+    try {
+        const user = await User.findByIdAndUpdate(userID, {
+            $addToSet: { likedposts: photoID },
+        });
+
+        // Save the photo to the user's library if it's not already there
+        // if (!user.like.some((likedposts) => photoId === likedposts.id)) {
+        //     user.photo.push(photo);
+        //     await user.save();
+        // }
+        res.status(200).json(user);
+    } catch (e) {
+        console.error(e);
+    }
+});
+
+// ************************************************
 // POST Route: SAVE THE CHANGES AFTER EDITING THE PHOTO ROUTE
 // ************************************************
 router.post('/photos/:photoID', (req, res) => {

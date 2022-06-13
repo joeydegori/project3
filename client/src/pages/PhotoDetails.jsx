@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { authAxios } from '../customAxios/authAxios';
 import Form from '../components/Form';
 import LikeContext from '../contexts/LikeContext';
 import UserContext from '../contexts/UserContext';
@@ -10,31 +11,32 @@ import { FcLikePlaceholder } from 'react-icons/fc';
 import { FcLike } from 'react-icons/fc';
 
 const PhotoDetails = () => {
-    const { user } = useContext(UserContext);
-
     const defaultFormData = {
         title: '',
         imageUrl: '',
     };
 
-    const navigateTo = useNavigate();
-    const { id } = useParams();
+    const [formData, setFormData] = useState(defaultFormData);
     const [photo, setPhoto] = useState(null);
     const [editToggler, setEditToggler] = useState(false);
     const [likeToggler, setLikeToggler] = useState(false);
-    const [formData, setFormData] = useState(defaultFormData);
+    const navigateTo = useNavigate();
+    const { id } = useParams();
+    const { user, setUser } = useContext(UserContext);
 
     //Getting likes(contains all liked books id) and updateLikedBooks function to add or delete book id
-    const { likes, updateLikedPhotos } = useContext(LikeContext);
+    const { likedposts, updateLikedPhotos } = useContext(LikeContext);
 
     const getPhotoDetails = async () => {
-        const { data } = await axios.get(`http://localhost:5005/photos/${id}`);
+        const { data } = await authAxios.get(
+            `http://localhost:5005/photos/${id}`
+        );
         setPhoto(() => data);
         setFormData(() => data);
     };
 
     const updatePhotoDetail = async () => {
-        const { data } = await axios.post(
+        const { data } = await authAxios.post(
             `http://localhost:5005/photos/${id}`,
             formData
         );
@@ -43,15 +45,27 @@ const PhotoDetails = () => {
     };
 
     const deletePhoto = async () => {
-        const { data } = await axios.delete(
+        const { data } = await authAxios.delete(
             `http://localhost:5005/photos/${id}`
         );
         navigateTo('/photos');
     };
 
+    const setLiked = async () => {
+        try {
+            //axios call, setlike post route => user+photoid
+            const { data } = await authAxios.post(
+                `http://localhost:5005/photos/likedposts`,
+                { userID: user.id, photoID: photo._id }
+            );
+            // setUser(() => data);
+            console.log(data);
+        } catch (error) {}
+    };
+
     const likeCheck = () => {
         //we add "photo" in the beginning just to make sure when the photo state is null, we dont want to execute setLikeToggler function. Basically its a short form of saying -> if(photo) {then do something here}
-        photo && setLikeToggler(() => likes.includes(photo._id));
+        photo && setLikeToggler(() => likedposts.includes(photo._id));
     };
 
     useEffect(() => {
@@ -92,11 +106,12 @@ const PhotoDetails = () => {
     const likeHandler = (e) => {
         setLikeToggler(() => !likeToggler);
 
-        //this function will execute from the LikeContext, we are passing like state and the book id as an argument.
-        updateLikedPhotos(!likeToggler, photo._id);
+        //this function will execute from the LikeContext, we are passing like state and the photo id as an argument.
+        updateLikedPhotos(!likeToggler, user.id, photo._id);
+        console.log(user.id, photo._id);
     };
 
-    return (
+    return user ? (
         <div>
             <h1>Photo Details</h1>
             {photo && !editToggler && (
@@ -122,6 +137,8 @@ const PhotoDetails = () => {
                 </div>
             )}
         </div>
+    ) : (
+        <></>
     );
 };
 

@@ -28,17 +28,32 @@ const navbarColor = {
 };
 
 const NavBar = () => {
-    const { likes } = useContext(LikeContext);
+    const { likedposts } = useContext(LikeContext);
     const { user } = useContext(UserContext);
 
     return (
         <Navbar style={navbarColor}>
-            <NavLink to='addphoto' style={linkStyle}>
-                Add Photo
-            </NavLink>
-            <NavLink to='photos' style={linkStyle}>
-                Photos
-            </NavLink>
+            {user ? (
+                <NavLink to='addphoto' style={linkStyle}>
+                    Post
+                </NavLink>
+            ) : (
+                <></>
+            )}
+            {user ? (
+                <NavLink to='photos/likedposts' style={linkStyle}>
+                    Liked Posts
+                </NavLink>
+            ) : (
+                <></>
+            )}
+            {user ? (
+                <NavLink to='photos' style={linkStyle}>
+                    Search
+                </NavLink>
+            ) : (
+                <></>
+            )}
             <NavLink to='/' style={linkStyle}>
                 Home
             </NavLink>

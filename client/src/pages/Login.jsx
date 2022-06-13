@@ -33,6 +33,7 @@ const Login = () => {
                 formData
             );
             setUser(() => data);
+            localStorage.setItem('token', JSON.stringify(data.token));
         } catch (error) {
             console.error(error);
         }
@@ -46,6 +47,7 @@ const Login = () => {
 
     const logoutHandler = (e) => {
         setUser(() => null);
+        localStorage.removeItem('token');
     };
 
     return user ? (
