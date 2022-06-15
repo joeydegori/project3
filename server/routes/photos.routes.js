@@ -3,6 +3,7 @@ const { jwtVerify } = require('../middlewares/jwtVerify.middleware');
 const Photo = require('../models/Photo.model');
 const User = require('../models/User.model');
 const fileUploader = require('../config/cloudinary.config');
+// const { adminVerify } = require('middlewares/adminVerify.middleware');
 
 // ************************************************
 // GET ALL PHOTOS ROUTE

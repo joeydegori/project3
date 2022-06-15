@@ -60,6 +60,7 @@ const Photos = () => {
                             <p>
                                 <button>
                                     <Link to={photo._id}>{photo.title}</Link>
+                                    {console.log(photo._id)}
                                 </button>
                             </p>
                         </div>

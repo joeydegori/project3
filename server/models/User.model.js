@@ -17,11 +17,11 @@ const userSchema = new Schema(
             },
         ],
         // //By using enum, user can have only two types of role.
-        // role: {
-        //     type: String,
-        //     enum: ['users'],
-        //     default: 'users',
-        // },
+        role: {
+            type: String,
+            enum: ['admin', 'users'],
+            default: 'users',
+        },
     },
     {
         // this second object adds extra properties: `createdAt` and `updatedAt`

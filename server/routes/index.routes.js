@@ -11,4 +11,5 @@ router.get('/', (req, res, next) => {
 router.use('/', authRoutes);
 
 router.use('/', photosRoutes);
+
 module.exports = router;
