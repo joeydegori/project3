@@ -4,17 +4,14 @@ import { authAxios } from '../customAxios/authAxios';
 import { Link } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const Profile = () => {
-    const { user, setUser } = useContext(UserContext);
+const UserDetails = () => {
     return (
         <div>
-            <h1>{user ? `Welcome ${user.username}!` : <></>}</h1>
-            <button>
-                <Link to='/'>Edit Profile</Link>
-            </button>
+            <p></p>
         </div>
     );
 };
 
-export default Profile;
+export default UserDetails;

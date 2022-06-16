@@ -13,7 +13,7 @@ import Photos from './pages/Photos';
 import AddPhoto from './pages/AddPhoto';
 import PhotoDetails from './pages/PhotoDetails';
 import LikedPosts from './pages/LikedPosts';
-// import UserDetails from './pages/UserDetails';
+import UserDetails from './pages/UserDetails';
 
 //providers
 import { UserProvider } from './contexts/UserContext';
@@ -31,10 +31,10 @@ const App = () => {
                         <Routes>
                             <Route path='/' element={<Home />} />
                             <Route element={<ProtectedRoute />}>
-                                {/* <Route
+                                <Route
                                     path='profile/:id'
                                     element={<UserDetails />}
-                                /> */}
+                                />
                                 <Route path='photos' element={<Photos />} />
 
                                 <Route path='profile' element={<Profile />} />

@@ -124,6 +124,7 @@ const PhotoDetails = () => {
                 {likeToggler ? <FcLike /> : <FcLikePlaceholder />}
             </button>
             <button onClick={editHandler}>Edit</button>
+            {console.log(user.role)}
             {user.role === 'admin' && (
                 <button onClick={deleteHandler}>Delete</button>
             )}
