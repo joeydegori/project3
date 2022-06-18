@@ -7,12 +7,24 @@ import { useParams } from 'react-router-dom';
 
 const Profile = () => {
     const { user, setUser } = useContext(UserContext);
+    const [photos, setPhotos] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const getUser = async () => {
+        const { data } = await authAxios.get(`http://localhost:5005/profile`);
+        setUser(() => data);
+    };
+
     return (
-        <div>
+        <div key={user.id}>
+            {/* <img src={user.imageUrl} alt='Photos' /> */}
             <h1>{user ? `Welcome ${user.username}!` : <></>}</h1>
-            <button>
-                <Link to='/'>Edit Profile</Link>
-            </button>
+            <p>
+                <button>
+                    <Link to={user.id}>Profile Details </Link>
+                    {console.log(user.id)}
+                </button>
+            </p>
         </div>
     );
 };

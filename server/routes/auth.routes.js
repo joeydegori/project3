@@ -5,7 +5,7 @@ const User = require('../models/User.model');
 
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
-        expiresIn: '15min',
+        expiresIn: '1d',
     });
 };
 
@@ -26,12 +26,13 @@ router.post('/register', async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(password, saltRounds);
         const user = await User.create({ username, password: hashedPassword });
-        const token = generateToken(user._id);
+        const token = generateToken(user.id);
         res.status(200).json({
             username,
-            id: user._id,
-            // role: user.role,
+            id: user.id,
+            role: user.role,
             token,
+            profilephoto: user.profilephoto,
         });
         return res.redirect('/profile');
     } catch (error) {
@@ -50,12 +51,13 @@ router.post('/login', async (req, res) => {
     try {
         const user = await User.findOne({ username });
         if (user && (await bcrypt.compare(password, user.password))) {
-            const token = generateToken(user._id);
+            const token = generateToken(user.id);
             res.status(200).json({
                 username,
-                id: user._id,
-                // role: user.role,
+                id: user.id,
+                role: user.role,
                 token,
+                profilephoto: user.profilephoto,
             });
         } else res.status(400).json({ message: 'Invalid Credentials' });
     } catch (error) {

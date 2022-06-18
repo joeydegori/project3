@@ -3,12 +3,12 @@ const { jwtVerify } = require('../middlewares/jwtVerify.middleware');
 const Photo = require('../models/Photo.model');
 const User = require('../models/User.model');
 const fileUploader = require('../config/cloudinary.config');
-// const { adminVerify } = require('middlewares/adminVerify.middleware');
+const { adminVerify } = require('../middlewares/jwtVerify.middleware');
 
 // ************************************************
 // GET ALL PHOTOS ROUTE
 // ************************************************
-router.get('/photos', (req, res, next) => {
+router.get('/photos', jwtVerify, (req, res, next) => {
     Photo.find()
         .then((allPhotosFromDB) => {
             res.status(200).json(allPhotosFromDB);
@@ -43,7 +43,7 @@ router.post('/upload', fileUploader.single('imageUrl'), (req, res, next) => {
 // ************************************************
 // CREATE A NEW PHOTO ROUTE
 // ************************************************
-router.post('/photos/newphoto', (req, res) => {
+router.post('/photos/newphoto', jwtVerify, (req, res) => {
     const { title, imageUrl } = req.body;
 
     Photo.create({ title, imageUrl })
@@ -58,7 +58,7 @@ router.post('/photos/newphoto', (req, res) => {
 // ************************************************
 // POST Route: FOR LIKED POSTS
 // ************************************************
-router.post('/photos/likedposts', async (req, res, next) => {
+router.post('/photos/likedposts', jwtVerify, async (req, res, next) => {
     const { userID, photoID } = req.body;
     console.log(userID, photoID);
     try {
@@ -80,7 +80,7 @@ router.post('/photos/likedposts', async (req, res, next) => {
 // ************************************************
 // POST Route: SAVE THE CHANGES AFTER EDITING THE PHOTO ROUTE
 // ************************************************
-router.post('/photos/:photoID', (req, res) => {
+router.post('/photos/:photoID', jwtVerify, (req, res) => {
     const { title, imageUrl } = req.body;
     console.log({ imageUrl });
     Photo.findByIdAndUpdate(
@@ -102,7 +102,7 @@ router.post('/photos/:photoID', (req, res) => {
 // ************************************************
 // GET A PHOTO DETAILS ROUTE
 // ************************************************
-router.get('/photos/:photoId', (req, res, next) => {
+router.get('/photos/:photoId', jwtVerify, (req, res, next) => {
     Photo.findById(req.params.photoId)
         .then((photoFromDB) => {
             res.status(200).json(photoFromDB);
@@ -118,7 +118,7 @@ router.get('/photos/:photoId', (req, res, next) => {
 // ************************************************
 // POST Route: DELETE THE Photo ROUTE
 // ************************************************
-router.delete('/photos/:photoID', (req, res) => {
+router.delete('/photos/:photoID', jwtVerify, (req, res) => {
     Photo.findByIdAndDelete(req.params.photoID)
         .then(() =>
             res.status(200).json({ message: 'Photo deleted successfully' })

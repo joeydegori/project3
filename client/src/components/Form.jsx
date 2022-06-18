@@ -1,7 +1,6 @@
 import service from '../api/service';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 const Form = ({ formData, setFormData, submitHandler, changeHandler }) => {
     const [imageUrl, setImageUrl] = useState('');
     // ******** this function handles the file upload ********

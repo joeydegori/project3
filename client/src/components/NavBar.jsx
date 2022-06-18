@@ -57,9 +57,6 @@ const NavBar = () => {
             <NavLink to='/' style={linkStyle}>
                 Home
             </NavLink>
-            <NavLink to='profile/:id' style={linkStyle}>
-                User Details
-            </NavLink>
 
             {user ? (
                 <NavLink to='login' style={linkStyle}>
