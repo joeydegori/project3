@@ -94,6 +94,7 @@ const UserDetails = () => {
                     <p>Username: {user.username}</p>
                     <p>
                         Profile Photo: <img src={user.imageUrl} />
+                        {console.log('hel')}
                     </p>
                 </div>
             )}

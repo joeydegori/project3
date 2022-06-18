@@ -32,7 +32,7 @@ router.post('/register', async (req, res) => {
             id: user.id,
             role: user.role,
             token,
-            profilephoto: user.profilephoto,
+            imageUrl: user.imageUrl,
         });
         return res.redirect('/profile');
     } catch (error) {
@@ -57,7 +57,7 @@ router.post('/login', async (req, res) => {
                 id: user.id,
                 role: user.role,
                 token,
-                profilephoto: user.profilephoto,
+                imageUrl: user.imageUrl,
             });
         } else res.status(400).json({ message: 'Invalid Credentials' });
     } catch (error) {

@@ -23,11 +23,11 @@ router.get('/profile/:userID', (req, res, next) => {
 // POST Route: SAVE THE CHANGES AFTER EDITING THE PHOTO ROUTE
 // ************************************************
 router.post('/profile/:userID', jwtVerify, (req, res) => {
-    const { username, password, likedposts, role, profilephoto } = req.body;
+    const { username, password, likedposts, role, imageUrl } = req.body;
     console.log({ username });
     User.findByIdAndUpdate(
         req.params.userID,
-        { username, password, likedposts, role, profilephoto },
+        { username, password, likedposts, role, imageUrl },
         { new: true }
     )
         .then((updatedUserFromDB) => {
