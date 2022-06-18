@@ -12,7 +12,7 @@ const UserDetails = () => {
         password: '',
         likedposts: '',
         role: '',
-        profilephoto: '',
+        imageUrl: '',
     };
 
     const handleFileUpload = (e) => {
