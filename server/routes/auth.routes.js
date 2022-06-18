@@ -29,7 +29,7 @@ router.post('/register', async (req, res) => {
         const token = generateToken(user.id);
         res.status(200).json({
             username,
-            id: user.id,
+            _id: user.id,
             role: user.role,
             token,
             imageUrl: user.imageUrl,
@@ -54,10 +54,11 @@ router.post('/login', async (req, res) => {
             const token = generateToken(user.id);
             res.status(200).json({
                 username,
-                id: user.id,
+                _id: user.id,
                 role: user.role,
                 token,
                 imageUrl: user.imageUrl,
+                likedposts: user.likedposts,
             });
         } else res.status(400).json({ message: 'Invalid Credentials' });
     } catch (error) {

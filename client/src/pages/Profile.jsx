@@ -16,13 +16,13 @@ const Profile = () => {
     };
 
     return (
-        <div key={user.id}>
+        <div key={user._id}>
             {/* <img src={user.imageUrl} alt='Photos' /> */}
             <h1>{user ? `Welcome ${user.username}!` : <></>}</h1>
             <p>
                 <button>
-                    <Link to={user.id}>Profile Details </Link>
-                    {console.log(user.id)}
+                    <Link to={user._id}>Profile Details </Link>
+                    {console.log(user._id)}
                 </button>
             </p>
         </div>

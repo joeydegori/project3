@@ -56,21 +56,63 @@ router.post('/photos/newphoto', jwtVerify, (req, res) => {
 });
 
 // ************************************************
+// Get Liked Posts ROUTE
+// ************************************************
+router.get('/photos/getLikedPosts', jwtVerify, (req, res) => {
+    User.findById(req.user._id)
+        .populate('likedposts')
+        .select({ likedposts: 1 })
+        .then((likedposts) => {
+            res.status(200).json(likedposts);
+        })
+        .catch((err) =>
+            console.log('Error while saving a new photo in the DB: ', err)
+        );
+});
+
+// ************************************************
 // POST Route: FOR LIKED POSTS
 // ************************************************
 router.post('/photos/likedposts', jwtVerify, async (req, res, next) => {
     const { userID, photoID } = req.body;
     console.log(userID, photoID);
     try {
-        const user = await User.findByIdAndUpdate(userID, {
-            $addToSet: { likedposts: photoID },
-        });
+        const user = await User.findByIdAndUpdate(
+            userID,
+            {
+                $addToSet: { likedposts: photoID },
+            },
+            { new: true }
+        );
 
         // Save the photo to the user's library if it's not already there
         // if (!user.like.some((likedposts) => photoId === likedposts.id)) {
         //     user.photo.push(photo);
         //     await user.save();
         // }
+        console.log(user);
+        res.status(200).json(user);
+    } catch (e) {
+        console.error(e);
+    }
+});
+
+// ************************************************
+// POST Route: FOR DISLIKE POSTS
+// ************************************************
+router.post('/photos/deleteposts', jwtVerify, async (req, res, next) => {
+    const { userID, photoID } = req.body;
+    console.log(userID, photoID);
+    try {
+        const user = await User.findByIdAndUpdate(
+            userID,
+            {
+                $pull: { likedposts: photoID },
+            },
+            { new: true }
+        );
+
+        console.log(user);
         res.status(200).json(user);
     } catch (e) {
         console.error(e);

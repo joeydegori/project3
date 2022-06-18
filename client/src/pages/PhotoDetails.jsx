@@ -51,21 +51,11 @@ const PhotoDetails = () => {
         navigateTo('/photos');
     };
 
-    const setLiked = async () => {
-        try {
-            //axios call, setlike post route => user+photoid
-            const { data } = await authAxios.post(
-                `http://localhost:5005/photos/likedposts`,
-                { userID: user.id, photoID: photo._id }
-            );
-            // setUser(() => data);
-            console.log(data);
-        } catch (error) {}
-    };
-
     const likeCheck = () => {
         //we add "photo" in the beginning just to make sure when the photo state is null, we dont want to execute setLikeToggler function. Basically its a short form of saying -> if(photo) {then do something here}
-        photo && setLikeToggler(() => likedposts.includes(photo._id));
+        photo &&
+            user.likedposts &&
+            setLikeToggler(() => user.likedposts.includes(photo._id));
     };
 
     useEffect(() => {
@@ -103,12 +93,33 @@ const PhotoDetails = () => {
         setEditToggler(() => !editToggler);
     };
 
-    const likeHandler = (e) => {
-        setLikeToggler(() => !likeToggler);
+    const setLiked = async () => {
+        try {
+            //axios call, setlike post route => user+photoid
+            if (!likeToggler) {
+                const { data } = await authAxios.post(
+                    `http://localhost:5005/photos/likedposts`,
+                    { userID: user._id, photoID: photo._id }
+                );
+                setUser(() => data);
+            } else {
+                const { data } = await authAxios.post(
+                    `http://localhost:5005/photos/deleteposts`,
+                    { userID: user._id, photoID: photo._id }
+                );
+                setUser(() => data);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
+    const likeHandler = (e) => {
+        setLiked();
+        setLikeToggler(() => !likeToggler);
         //this function will execute from the LikeContext, we are passing like state and the photo id as an argument.
-        updateLikedPhotos(!likeToggler, user.id, photo._id);
-        console.log(user.id, photo._id);
+        // updateLikedPhotos(!likeToggler, user.id, photo._id);
+        // console.log(user._id, photo._id);
     };
 
     return user ? (

@@ -46,7 +46,9 @@ const Home = () => {
                             <img src={photo.imageUrl} alt='Photos' />
                             <p>
                                 <button>
-                                    <Link to={photo._id}>{photo.title}</Link>
+                                    <Link to={`/photos/${photo._id}`}>
+                                        {photo.title}
+                                    </Link>
                                     {console.log(photo._id)}
                                 </button>
                             </p>
