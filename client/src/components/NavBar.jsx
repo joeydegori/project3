@@ -49,14 +49,14 @@ const NavBar = () => {
             )}
             {user ? (
                 <NavLink to='photos' style={linkStyle}>
-                    Search
+                    Home
                 </NavLink>
             ) : (
                 <></>
             )}
-            <NavLink to='/' style={linkStyle}>
+            {/* <NavLink to='photos' style={linkStyle}>
                 Home
-            </NavLink>
+            </NavLink> */}
 
             {user ? (
                 <NavLink to='login' style={linkStyle}>

@@ -1,9 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { authAxios } from '../customAxios/authAxios';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import UserContext from '../contexts/UserContext';
 
 const LikedPosts = () => {
     const [likes, setLikes] = useState([]);
+    const { user } = useContext(UserContext);
 
     const getLikedPosts = async () => {
         try {
@@ -15,14 +18,50 @@ const LikedPosts = () => {
             console.log(error);
         }
     };
+
     useEffect(() => {
         getLikedPosts();
     }, []);
-    return (
+
+    return user ? (
         <div>
-            <p>Hello Saved Posts </p>
+            <h1></h1>
+            <div>
+                <p></p>
+            </div>
+
+            {likes.map((like) => {
+                console.log(like);
+                return (
+                    <div key={like._id}>
+                        <img src={like.imageUrl} alt='Photos' />
+
+                        <p>
+                            {/* <button>
+                                <Link to={`/photos/likedposts`}>Hello</Link>
+                            </button> */}
+                        </p>
+                    </div>
+                );
+            })}
         </div>
+    ) : (
+        <></>
     );
+
+    //    return ( likes.map((like) => {
+    //         console.log(likes);
+    //         return(
+    //             <div key={like._id}>
+    //                 <img src={like} alt='Photos' />
+    //                 <p>
+    //                     <button>
+    //                         <Link to={`/photos/likedposts`}>Hello</Link>
+    //                     </button>
+    //                 </p>
+    //             </div>
+    //         ))
+    //     });
 };
 
 export default LikedPosts;
