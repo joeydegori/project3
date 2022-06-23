@@ -16,7 +16,6 @@ const styles = {
 const linkStyle = {
     color: '#fbf9f2',
     textDecoration: 'none',
-    // border: 'black',
     fontFamily: 'Joan',
     fontSize: '15px',
     fontWeight: 'bold',
@@ -100,7 +99,7 @@ const NavBar = () => {
                 </NavLink>
             ) : (
                 <NavLink to='login' style={linkStyle}>
-                    Signup
+                    Register
                 </NavLink>
             )}
             {user ? (

@@ -50,32 +50,48 @@ const Login = () => {
         localStorage.removeItem('token');
     };
 
+    const buttonLettersStyle = {
+        color: '#fbf9f2',
+    };
+
     return user ? (
         <div>
             <button onClick={logoutHandler}>Logout</button>
         </div>
     ) : (
         <div>
-            <h1>{loginState}</h1>
-            <p>Please Register/Login</p>
-            <button onClick={() => setLoginState('Login')}>Login</button>
-            <button onClick={() => setLoginState('Register')}>Register</button>
+            <h1 className='loginState'>{loginState}</h1>
+            {/* <p style={buttonLettersStyle}>Please Register/Login</p> */}
+            <button
+                className='loginButton'
+                onClick={() => setLoginState('Login')}
+            >
+                Login
+            </button>
+            <button
+                className='loginButton'
+                onClick={() => setLoginState('Register')}
+            >
+                Register
+            </button>
             <form onSubmit={submitHandler}>
-                <label>Username: </label>
+                <label className='userDets'>Username: </label>
                 <input
+                    className='boxUserDets'
                     type='text'
                     name='username'
                     onChange={changeHandler}
                     value={formData.username}
                 />
-                <label>Password: </label>
+                <label className='userDets'>Password: </label>
                 <input
+                    className='boxUserDets'
                     type='text'
                     name='password'
                     onChange={changeHandler}
                     value={formData.password}
                 />
-                <button>Submit</button>
+                <button className='submitLogin'>Submit</button>
             </form>
         </div>
     );
