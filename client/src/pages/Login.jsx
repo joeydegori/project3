@@ -3,6 +3,8 @@ import axios from 'axios';
 //context
 import UserContext from '../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
+import blueflower from '../images/blueflower.png';
+import pinkflower from '../images/pinkflower.png';
 
 const Login = () => {
     const defaultFormData = {
@@ -54,9 +56,44 @@ const Login = () => {
         color: '#fbf9f2',
     };
 
+    const blueCorner = {
+        height: '300px',
+        weight: '300px',
+        display: 'flex',
+        alignItems: 'center',
+        marginTop: '-270px',
+        transform: 'rotate(-20deg)',
+    };
+
+    const pinkRightMiddle = {
+        display: 'flex',
+        marginLeft: '785px',
+        marginTop: '100px',
+        transform: 'rotate(20deg)',
+    };
+    const blueCorner2 = {
+        height: '300px',
+        weight: '300px',
+        display: 'flex',
+        alignItems: 'center',
+        marginTop: '-10px',
+        transform: 'rotate(-20deg)',
+    };
+
+    const pinkRightMiddle2 = {
+        display: 'flex',
+        marginLeft: '760px',
+        marginTop: '30px',
+        transform: 'rotate(20deg)',
+    };
+
     return user ? (
         <div>
-            <button onClick={logoutHandler}>Logout</button>
+            <button className='logoutButton' onClick={logoutHandler}>
+                Logout
+            </button>
+            <img style={blueCorner2} src={blueflower} />
+            <img style={pinkRightMiddle2} src={pinkflower} />
         </div>
     ) : (
         <div>
@@ -92,6 +129,8 @@ const Login = () => {
                     value={formData.password}
                 />
                 <button className='submitLogin'>Submit</button>
+                <img style={blueCorner} src={blueflower} />
+                <img style={pinkRightMiddle} src={pinkflower} />
             </form>
         </div>
     );

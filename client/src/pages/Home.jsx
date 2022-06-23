@@ -1,38 +1,86 @@
 import { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
-import { authAxios } from '../customAxios/authAxios';
-import { Link } from 'react-router-dom';
 import UserContext from '../contexts/UserContext';
+import blueflower from '../images/blueflower.png';
+import pinkflower from '../images/pinkflower.png';
+import yellowflower from '../images/yellowflower.png';
 
 const Home = () => {
-    // const [photos, setPhotos] = useState([]);
-    // const [searchTerm, setSearchTerm] = useState('');
     const { user } = useContext(UserContext);
 
-    // //Requestiong all the photos from our database
-    // //authAxios is custom axios instance, it allows us to send Bearer tokens with the request
-    // //We are using authAxios here to prevent unauthorized user to view the photos list
-    // const getPhotos = async () => {
-    //     const { data } = await authAxios.get(`http://localhost:5005/photos`);
-    //     setPhotos(() => data);
-    // };
+    const noUserStyle = {
+        color: '#fbf9f2',
+        fontWeight: 'bold',
+    };
 
-    // const changeHandler = (e) => {
-    //     setSearchTerm(e.target.value);
-    // };
+    const borderStyle = {
+        color: '#fbf9f2',
+        fontWeight: 'bold',
+        border: '2px',
+        borderStyle: 'solid',
+        padding: '10px',
+        marginRight: '350px',
+        marginLeft: '350px',
+        marginTop: '350px',
+    };
 
-    // //This useEffect will execute getbooks function only one time when this page loads
-    // useEffect(() => {
-    //     try {
-    //         getPhotos();
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // }, []); //<-- No dependency, means it will execute only one time
+    const blueCorner = {
+        height: '300px',
+        weight: '300px',
+        display: 'flex',
+        alignItems: 'center',
+        marginTop: '-450px',
+    };
+
+    const pinkRightMiddle = {
+        display: 'flex',
+        marginLeft: '785px',
+        marginTop: '100px',
+    };
 
     return user ? (
         <div>
-            {/* {photos
+            <h2 style={borderStyle}>
+                Welcome, {user.username} to Life in Photos!
+            </h2>
+            <img style={blueCorner} src={blueflower} />
+            <img style={pinkRightMiddle} src={pinkflower} />
+        </div>
+    ) : (
+        <div>
+            <h2 style={borderStyle}>
+                Welcome to Life in Photos. Register or login to start!
+            </h2>
+            <img style={blueCorner} src={blueflower} />
+            <img style={pinkRightMiddle} src={pinkflower} />
+        </div>
+    );
+};
+export default Home;
+
+// const [photos, setPhotos] = useState([]);
+// const [searchTerm, setSearchTerm] = useState('');
+// //Requestiong all the photos from our database
+// //authAxios is custom axios instance, it allows us to send Bearer tokens with the request
+// //We are using authAxios here to prevent unauthorized user to view the photos list
+// const getPhotos = async () => {
+//     const { data } = await authAxios.get(`http://localhost:5005/photos`);
+//     setPhotos(() => data);
+// };
+
+// const changeHandler = (e) => {
+//     setSearchTerm(e.target.value);
+// };
+
+// //This useEffect will execute getbooks function only one time when this page loads
+// useEffect(() => {
+//     try {
+//         getPhotos();
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }, []); //<-- No dependency, means it will execute only one time
+
+/* {photos
                 .filter((photo) =>
                     searchTerm.length > 0
                         ? photo.title
@@ -54,16 +102,4 @@ const Home = () => {
                             </p>
                         </div>
                     );
-                })} */}
-            <h1>Welcome to Life in Photos</h1>
-            <h2>How it works!</h2>
-            <h3>Post</h3>
-            <h3>Like</h3>
-            <h3>Create</h3>
-            <h3>Save your favorite photos</h3>
-        </div>
-    ) : (
-        <h1>Sign up or Login to start!</h1>
-    );
-};
-export default Home;
+                })} */
