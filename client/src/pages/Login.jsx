@@ -14,7 +14,7 @@ const Login = () => {
     //This function will help us to navigate between routes
     const navigateTo = useNavigate();
 
-    const [loginState, setLoginState] = useState('login');
+    const [loginState, setLoginState] = useState('Login');
 
     const [formData, setFormData] = useState(defaultFormData);
 
@@ -58,8 +58,8 @@ const Login = () => {
         <div>
             <h1>{loginState}</h1>
             <p>Please Register/Login</p>
-            <button onClick={() => setLoginState('login')}>Login</button>
-            <button onClick={() => setLoginState('register')}>Register</button>
+            <button onClick={() => setLoginState('Login')}>Login</button>
+            <button onClick={() => setLoginState('Register')}>Register</button>
             <form onSubmit={submitHandler}>
                 <label>Username: </label>
                 <input

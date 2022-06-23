@@ -2,7 +2,7 @@ const router = require('express').Router();
 const authRoutes = require('./auth.routes');
 const photosRoutes = require('./photos.routes');
 
-router.get('/', (req, res, next) => {
+router.get('photos', (req, res, next) => {
     res.json('All good in here');
 });
 

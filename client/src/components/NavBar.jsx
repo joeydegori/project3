@@ -3,6 +3,9 @@ import { useContext } from 'react';
 import { Navbar } from 'react-bootstrap';
 import LikeContext from '../contexts/LikeContext';
 import UserContext from '../contexts/UserContext';
+import blueflower from '../images/blueflower.png';
+import pinkflower from '../images/pinkflower.png';
+import yellowflower from '../images/yellowflower.png';
 
 const styles = {
     display: 'flex',
@@ -11,20 +14,42 @@ const styles = {
 
 //Key difference between Link and NavLink is to hace access of this "isActive" object.
 const linkStyle = {
-    color: 'black',
+    color: '#fbf9f2',
     textDecoration: 'none',
+    // border: 'black',
     fontFamily: 'Joan',
     fontSize: '15px',
-    margin: '10px',
-    height: '100px',
+    fontWeight: 'bold',
+    margin: '20px',
+    height: '20px',
 };
 
 const navbarColor = {
     display: 'flex',
-    justifyContent: 'end',
-    backgroundColor: '#B1BCA0',
-    height: '150px',
+    justifyContent: 'space-evenly',
+    backgroundColor: '#b2c7ac',
+    height: '80px',
     margin: '10px',
+    borderStyle: 'solid',
+    borderRadius: '30px',
+    borderColor: 'white',
+    borderWidth: '3px',
+    borderColor: '#efeade',
+    borderPaddingRight: '80px',
+};
+
+const imageStyle = {
+    height: '50px',
+    width: '50px',
+    margin: '-45px',
+    padding: '-10px',
+};
+
+const noUserImg = {
+    height: '50px',
+    width: '50px',
+    margin: '-45px',
+    padding: '-10px',
 };
 
 const NavBar = () => {
@@ -33,6 +58,7 @@ const NavBar = () => {
 
     return (
         <Navbar style={navbarColor}>
+            <img style={imageStyle} src={blueflower} />
             {user ? (
                 <NavLink to='addphoto' style={linkStyle}>
                     Post
@@ -49,14 +75,14 @@ const NavBar = () => {
             )}
             {user ? (
                 <NavLink to='photos' style={linkStyle}>
-                    Home
+                    Search
                 </NavLink>
             ) : (
                 <></>
             )}
-            {/* <NavLink to='photos' style={linkStyle}>
+            <NavLink to='/' style={linkStyle}>
                 Home
-            </NavLink> */}
+            </NavLink>
 
             {user ? (
                 <NavLink to='login' style={linkStyle}>
@@ -77,7 +103,17 @@ const NavBar = () => {
                     Signup
                 </NavLink>
             )}
-            <hr />
+            {user ? (
+                <div>
+                    <img style={imageStyle} src={blueflower} />
+                    <img style={imageStyle} src={pinkflower} />
+                </div>
+            ) : (
+                <div>
+                    <img style={noUserImg} src={blueflower} />
+                    <img style={noUserImg} src={pinkflower} />
+                </div>
+            )}
         </Navbar>
     );
 };

@@ -8,3 +8,7 @@ body {
 code {
     font-family: 'Joan';
 }
+
+.NavLink {
+    color: aqua;
+}

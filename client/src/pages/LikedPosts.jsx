@@ -25,7 +25,7 @@ const LikedPosts = () => {
 
     return user ? (
         <div>
-            <h1></h1>
+            <h1>Liked Posts</h1>
             <div>
                 <p></p>
             </div>
@@ -37,9 +37,12 @@ const LikedPosts = () => {
                         <img src={like.imageUrl} alt='Photos' />
 
                         <p>
-                            {/* <button>
-                                <Link to={`/photos/likedposts`}>Hello</Link>
-                            </button> */}
+                            <button>
+                                <Link to={`/photos/${like._id}`}>
+                                    {like.title}
+                                </Link>
+                                {/* {console.log(photo._id)} */}
+                            </button>
                         </p>
                     </div>
                 );

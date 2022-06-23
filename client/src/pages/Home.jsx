@@ -5,34 +5,34 @@ import { Link } from 'react-router-dom';
 import UserContext from '../contexts/UserContext';
 
 const Home = () => {
-    const [photos, setPhotos] = useState([]);
-    const [searchTerm, setSearchTerm] = useState('');
+    // const [photos, setPhotos] = useState([]);
+    // const [searchTerm, setSearchTerm] = useState('');
     const { user } = useContext(UserContext);
 
-    //Requestiong all the photos from our database
-    //authAxios is custom axios instance, it allows us to send Bearer tokens with the request
-    //We are using authAxios here to prevent unauthorized user to view the photos list
-    const getPhotos = async () => {
-        const { data } = await authAxios.get(`http://localhost:5005/photos`);
-        setPhotos(() => data);
-    };
+    // //Requestiong all the photos from our database
+    // //authAxios is custom axios instance, it allows us to send Bearer tokens with the request
+    // //We are using authAxios here to prevent unauthorized user to view the photos list
+    // const getPhotos = async () => {
+    //     const { data } = await authAxios.get(`http://localhost:5005/photos`);
+    //     setPhotos(() => data);
+    // };
 
-    const changeHandler = (e) => {
-        setSearchTerm(e.target.value);
-    };
+    // const changeHandler = (e) => {
+    //     setSearchTerm(e.target.value);
+    // };
 
-    //This useEffect will execute getbooks function only one time when this page loads
-    useEffect(() => {
-        try {
-            getPhotos();
-        } catch (error) {
-            console.error(error);
-        }
-    }, []); //<-- No dependency, means it will execute only one time
+    // //This useEffect will execute getbooks function only one time when this page loads
+    // useEffect(() => {
+    //     try {
+    //         getPhotos();
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // }, []); //<-- No dependency, means it will execute only one time
 
     return user ? (
         <div>
-            {photos
+            {/* {photos
                 .filter((photo) =>
                     searchTerm.length > 0
                         ? photo.title
@@ -54,10 +54,16 @@ const Home = () => {
                             </p>
                         </div>
                     );
-                })}
+                })} */}
+            <h1>Welcome to Life in Photos</h1>
+            <h2>How it works!</h2>
+            <h3>Post</h3>
+            <h3>Like</h3>
+            <h3>Create</h3>
+            <h3>Save your favorite photos</h3>
         </div>
     ) : (
-        <></>
+        <h1>Sign up or Login to start!</h1>
     );
 };
 export default Home;
