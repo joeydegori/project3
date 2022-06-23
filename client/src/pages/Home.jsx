@@ -28,7 +28,7 @@ const Home = () => {
         weight: '300px',
         display: 'flex',
         alignItems: 'center',
-        marginTop: '-450px',
+        marginTop: '-440px',
     };
 
     const pinkRightMiddle = {
@@ -42,6 +42,7 @@ const Home = () => {
             <h2 style={borderStyle}>
                 Welcome, {user.username} to Life in Photos!
             </h2>
+
             <img style={blueCorner} src={blueflower} />
             <img style={pinkRightMiddle} src={pinkflower} />
         </div>

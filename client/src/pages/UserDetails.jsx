@@ -86,18 +86,71 @@ const UserDetails = () => {
         setUser({ ...user, [e.target.name]: e.target.value });
     };
 
+    const h1Style = {
+        color: '#fbf9f2',
+        fontWeight: 'bold',
+    };
+
+    const h3Style = {
+        color: '#fbf9f2',
+        fontWeight: 'bold',
+    };
+    const h3Style2 = {
+        color: '#fbf9f2',
+        fontWeight: 'bold',
+        position: 'absolute',
+        right: '510px',
+    };
+
+    const borderStyle = {
+        color: '#fbf9f2',
+        fontWeight: 'bold',
+        border: '2px',
+        borderStyle: 'solid',
+        padding: '10px',
+        marginRight: '350px',
+        marginLeft: '350px',
+        marginTop: '0px',
+    };
+
+    const labelStyle = {
+        color: '#fbf9f2',
+        fontWeight: 'bold',
+        margin: '10px',
+        position: 'absolute',
+        right: '624px',
+
+        // marginLeft: '100px',
+    };
+    const labelStyle2 = {
+        color: '#fbf9f2',
+        fontWeight: 'bold',
+    };
+
+    const editButton = {
+        marginLeft: '200px',
+        marginTop: '70px',
+    };
+
     return (
         <div>
-            <h1>Edit Profile</h1>
+            <h1 style={h1Style}>Edit Profile</h1>
             {user && !editToggler && (
-                <div key={user.id}>
-                    <p>Username: {user.username}</p>
-                    <p>
-                        Profile Photo: <img src={user.imageUrl} />
-                    </p>
+                <div style={borderStyle} key={user.id}>
+                    <h3 style={h3Style}>
+                        <img src={user.imageUrl} />
+                    </h3>
+                    <h3 style={h3Style2}>Username: {user.username}</h3>
+                    <button
+                        style={editButton}
+                        className='editProfile'
+                        onClick={editHandler}
+                    >
+                        Edit
+                    </button>
                 </div>
             )}
-            <button onClick={editHandler}>Edit</button>
+
             {user.role === 'admin' && (
                 <button onClick={deleteHandler}>Delete</button>
             )}
@@ -105,24 +158,30 @@ const UserDetails = () => {
             {editToggler && (
                 <div>
                     <form onSubmit={submitHandler}>
-                        <label>Username:</label>
+                        <label style={labelStyle2}>Username:</label>
                         <input
+                            className='editProfileDets'
                             type='text'
                             name='username'
                             value={user.username}
                             onChange={(e) => changeHandler(e)}
                         />
                         <br />
-                        <label>Profile Photo: </label>
+                        <label style={labelStyle}>Profile Photo: </label>
                         <input
+                            className='choosePhotoDets'
                             type='file'
                             name='imageUrl'
                             onChange={(e) => handleFileUpload(e)}
                         />
                         <br />
-                        <button type='submit'>Submit</button>
+                        <button className='submitProfileDets' type='submit'>
+                            Submit
+                        </button>
                     </form>
-                    <button onClick={editHandler}>Cancel</button>
+                    <button className='cancelProfileDets' onClick={editHandler}>
+                        Cancel
+                    </button>
                 </div>
             )}
         </div>
